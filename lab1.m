@@ -1,4 +1,4 @@
-% Contributors: Victor Turpin Aguayo
+% Contributors: Victor Turpin Aguayo, Lola Feilke
 % Course number: ASEN 3801
 % File name: lab1
 % Created: 1/12/26
@@ -86,3 +86,7 @@ variableNames = {'1e-2', '1e-4', '1e-6', '1e-8', '1e-10'};
 T = array2table(diff, 'VariableNames', variableNames);
 
 disp(T)
+
+%% 2b
+% Calculate the density of the atmosphere in Boulder (@1655m)
+[rho, a, temp, press] = stdatmo(1655);
