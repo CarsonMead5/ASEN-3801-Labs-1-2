@@ -44,7 +44,7 @@ v_y = velocity(2);
 v_z = velocity(3);
 a_x = f_drag(1)/m;
 a_y = f_drag(2)/m;
-a_z = f_drag(3)/m - g;
+a_z = f_drag(3)/m + g;
 
 % Building state vector xdot
 xdot = [v_x;v_y;v_z;a_x;a_y;a_z];
