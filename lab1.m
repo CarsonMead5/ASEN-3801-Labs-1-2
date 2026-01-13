@@ -78,10 +78,11 @@ x_end = statevector(end,2);
 y_end = statevector(end,3);
 z_end = statevector(end,4);
 
-diff(:,i) = [w_end - w_r; x_end - x_r; y_end - y_r; z_end - z_r];
+diff(:,i) = abs([w_end - w_r; x_end - x_r; y_end - y_r; z_end - z_r]);
 end
 
 % Create the table (each row is a statevector variable)
 variableNames = {'1e-2', '1e-4', '1e-6', '1e-8', '1e-10'};
 T = array2table(diff, 'VariableNames', variableNames);
+
 disp(T)
