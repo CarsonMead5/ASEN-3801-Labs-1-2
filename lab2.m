@@ -44,12 +44,15 @@ plot(t_vec, av_pos_inert(1,:),'-b');
 hold on;
 plot(t_vec, tar_pos_inert(1,:),'--r');
 ylabel('X position (m)')
-legend('Aerospace Vehicle', 'Target')
+legend('Aerospace Vehicle', 'Target',Location='bestoutside')
+grid on;
+
 subplot(3, 1, 2);
 plot(t_vec, av_pos_inert(2,:),'-b');
 hold on;
 plot(t_vec, tar_pos_inert(2,:),'--r');
 ylabel('Y position (m)')
+grid on;
 
 subplot(3, 1, 3);
 plot(t_vec, av_pos_inert(3,:),'-b');
@@ -57,24 +60,29 @@ hold on;
 plot(t_vec, tar_pos_inert(3,:),'--r');
 ylabel('Z position (m)')
 xlabel('Time(s)')
+grid on;
 
 %% Need to change to degrees
 figure();
 subplot(3, 1, 1);
-plot(t_vec, av_att(1,:),'-b');
+plot(t_vec, rad2deg(av_att(1,:)),'-b');
 hold on;
-plot(t_vec, tar_att(1,:),'--r');
-ylabel('X position (m)')
+plot(t_vec, rad2deg(tar_att(1,:)),'--r');
+ylabel('Yaw \psi (deg)')
+legend('Aerospace Vehicle', 'Target',Location='bestoutside')
+grid on;
 
 subplot(3, 1, 2);
-plot(t_vec, av_att(2,:),'-b');
+plot(t_vec, rad2deg(av_att(2,:)),'-b');
 hold on;
-plot(t_vec, tar_att(2,:),'--r');
-ylabel('Y position (m)')
+plot(t_vec, rad2deg(tar_att(2,:)),'--r');
+ylabel('Pitch \theta (deg)')
+grid on;
 
 subplot(3, 1, 3);
-plot(t_vec, av_att(3,:),'-b');
+plot(t_vec, rad2deg(av_att(3,:)),'-b');
 hold on;
-plot(t_vec, tar_att(3,:),'--r');
-ylabel('Z position (m)')
+plot(t_vec, rad2deg(tar_att(3,:)),'--r');
+ylabel('Roll \phi (deg)')
 xlabel('Time(s)')
+grid on;
