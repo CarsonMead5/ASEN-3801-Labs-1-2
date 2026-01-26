@@ -9,9 +9,17 @@ clc;clear;close all
 [t_vec, av_pos_inert, av_att, tar_pos_inert, tar_att] = LoadASPENData('3801_Sec001_test1.csv');
 
 %% 2b
+attitude321 = [9 -2 33];
+DCM_321 = RotationMatrix321(attitude321)
 
+attitude321_2 = EulerAngles321(DCM_321)
 %% 2c
+% When beta (Y) is negative, it flips all the angles; when beta (Y) is 0,
+% it just adds the Z angles (makes sense because no change)
+attitude313 = [-9 0 -11]
+DCM_313 = RotationMatrix313(attitude313)
 
+attitude313_2 = EulerAngles313(DCM_313)
 %% 2d
 
 %% 2e
@@ -31,20 +39,21 @@ plot3(pos_av_N(1,:),pos_av_N(2,:),pos_av_N(3,:),'-b');
 hold on
 plot3(pos_tar_N(1,:),pos_tar_N(2,:),pos_tar_N(3,:),'--r');
 grid on;
-legend('Aerospace Vehicle','Target')
+lgd = legend('Aerospace Vehicle','Target');
+set(lgd,'Position',[0.437582915683962 0.793579130997642 0.189937106918239 0.0657620041753654]);
 xlabel('X position (m)')
 ylabel('Y position (m)')
 zlabel('Z position (m)')
 
 % Question 4 (Frame E)
-
 figure();
 subplot(3, 1, 1);
 plot(t_vec, av_pos_inert(1,:),'-b');
 hold on;
 plot(t_vec, tar_pos_inert(1,:),'--r');
 ylabel('X position (m)')
-legend('Aerospace Vehicle', 'Target',Location='bestoutside')
+lgd1 = legend('Aerospace Vehicle', 'Target');
+set(lgd1,'Position',[0.430607966457023 0.938175646974225 0.171069182389937 0.0553235908141962]);
 grid on;
 
 subplot(3, 1, 2);
@@ -62,14 +71,14 @@ ylabel('Z position (m)')
 xlabel('Time(s)')
 grid on;
 
-%% Need to change to degrees
 figure();
 subplot(3, 1, 1);
 plot(t_vec, rad2deg(av_att(1,:)),'-b');
 hold on;
 plot(t_vec, rad2deg(tar_att(1,:)),'--r');
 ylabel('Yaw \psi (deg)')
-legend('Aerospace Vehicle', 'Target',Location='bestoutside')
+lgd2 = legend('Aerospace Vehicle', 'Target');
+set(lgd2,'Position',[0.430607966457023 0.938175646974225 0.171069182389937 0.0553235908141962]);
 grid on;
 
 subplot(3, 1, 2);
@@ -86,3 +95,4 @@ plot(t_vec, rad2deg(tar_att(3,:)),'--r');
 ylabel('Roll \phi (deg)')
 xlabel('Time(s)')
 grid on;
+

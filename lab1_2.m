@@ -61,7 +61,7 @@ xlabel("Displacement (North)")
 ylabel("Displacement (East)")
 zlabel("Displacement (Down)")
 set(gca, 'ZDir', 'reverse');
-print(".\Lab1_2c_Figure","-dpng","-r300")
+%print(".\Lab1_2c_Figure","-dpng","-r300")
 
 % Determining max height reached
 max_height = max(abs(X(3,:)));
@@ -112,7 +112,7 @@ zlabel("Displacement (Down)")
 legend("0 m/s","10 m/s","20 m/s","30 m/s","40 m/s","50 m/s")
 set(gca, 'ZDir', 'reverse');
 view([-1.5,-1,0.5])
-print("./Object Varying Trajectories","-dpng","-r300")
+%print("./Object Varying Trajectories","-dpng","-r300")
 
 %% Plotting Figures (Part D)
 
@@ -123,7 +123,7 @@ grid on
 title("Wind Velocity vs. Final X-Position")
 ylabel("Horizontal Displacement (m)")
 xlabel("Northbound Windspeed (m/s)")
-print("./Crosswind vs X-Dist","-dpng","-r300")
+%print("./Crosswind vs X-Dist","-dpng","-r300")
 
 % Plotting wind velocity effect on final distance from origin
 figure()
@@ -132,7 +132,7 @@ grid on
 title("Wind Velocity vs. Total Distance")
 ylabel("Total Distance from Origin (m)")
 xlabel("Northbound Windspeed (m/s)")
-print("./Crosswind vs Total Dist","-dpng","-r300")
+%print("./Crosswind vs Total Dist","-dpng","-r300")
 
 %% Varying Geopotential Altitude and Wind Velocity (Part E)
 
@@ -182,7 +182,7 @@ title("Wind Velocity vs. Total Distance at Different Altitudes")
 xlabel("Northbound Windspeed (m/s)")
 ylabel("Total Distance (m)")
 legend("0 m","","800 m","","1600 m","","2400 m","","3200 m","","4000 m","","Location","northwest")
-print("./Total Distance at Different Altitudes","-dpng","-r300")
+%print("./Total Distance at Different Altitudes","-dpng","-r300")
 
 % Plotting minimum distance as a function of geopotential altitude
 figure()
@@ -191,7 +191,7 @@ grid on
 title("Minimum Distance vs. Geopotential Altitude")
 xlabel("Geopotential Altitude (m)")
 ylabel("Minimum Total Displacement (m)")
-print("./Minimum Total Distance at Different Altitudes","-dpng","-r300")
+%print("./Minimum Total Distance at Different Altitudes","-dpng","-r300")
 
 %% Varying Mass at a Constant Kinetic Energy (Part F)
 
@@ -234,7 +234,7 @@ grid on
 title("Total Distance vs. Object Mass")
 xlabel("Object Mass (kg)")
 ylabel("Total Distance (m)")
-print("./Total Distance on Varied Masses","-dpng","-r300")
+%print("./Total Distance on Varied Masses","-dpng","-r300")
 
 % Updating figure as ode45 runs
 figure()
@@ -269,4 +269,4 @@ title("Total Distance of Different Mass Objects at Varied Windspeeds")
 xlabel("Northbound Windspeed (m/s)")
 ylabel("Total Distance (m)")
 legend("0.005 kg","0.01 kg","0.015 kg","0.02 kg","0.025 kg","0.03 kg","0.035 kg","0.04 kg","Location","northwest")
-print("./Varied Masses and Windspeeds","-dpng","-r300")
+%print("./Varied Masses and Windspeeds","-dpng","-r300")
