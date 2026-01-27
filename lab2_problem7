@@ -1,0 +1,53 @@
+% Author: Liam Karlson
+% Course number: ASEN 3801
+% File name: lab2_problem7
+% Created: 1/27/26
+
+clc; clear; close all;
+
+% loading data 
+filename = '3801_Sec001_test1.csv';
+[t_vec, av_pos_inert, av_att, tar_pos_inert, ~] = LoadASPENData(filename);
+
+% problem 7
+% relative position in frame E
+r_tar_av_E = tar_pos_inert - av_pos_inert;   
+
+n = length(t_vec);
+r_tar_av_B = zeros(3,n);
+
+for k = 1:n
+    % vehicle 321 euler angles from ConvertASPENData 
+    phi   = av_att(1,k);
+    theta = av_att(2,k);
+    psi   = av_att(3,k);
+
+    cphi = cos(phi);   sphi = sin(phi);
+    cth  = cos(theta); sth  = sin(theta);
+    cpsi = cos(psi);   spsi = sin(psi);
+
+    % maps vectors from frame E into frame B
+    C_BE = [ ...
+        cth*cpsi,                      cth*spsi,                     -sth;
+        sphi*sth*cpsi - cphi*spsi,     sphi*sth*spsi + cphi*cpsi,     sphi*cth;
+        cphi*sth*cpsi + sphi*spsi,     cphi*sth*spsi - sphi*cpsi,     cphi*cth ];
+
+    % relative position in frame B
+    r_tar_av_B(:,k) = C_BE * r_tar_av_E(:,k);
+end
+
+%% Plot
+figure()
+subplot(3,1,1)
+plot(t_vec, r_tar_av_B(1,:), 'b', 'LineWidth', 1.5)
+ylabel('x_B (m)'); grid on
+
+subplot(3,1,2)
+plot(t_vec, r_tar_av_B(2,:), 'b', 'LineWidth', 1.5)
+ylabel('y_B (m)'); grid on
+
+subplot(3,1,3)
+plot(t_vec, r_tar_av_B(3,:), 'b', 'LineWidth', 1.5)
+ylabel('z_B (m)'); xlabel('Time (s)'); grid on
+
+sgtitle('Target Relative Position Expressed in Vehicle Body Frame B')
