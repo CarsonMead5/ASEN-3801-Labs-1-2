@@ -46,10 +46,12 @@ hold on
 plot3(pos_tar_N(1,:),pos_tar_N(2,:),pos_tar_N(3,:),'--r',LineWidth=1);
 grid on;
 lgd = legend('Aerospace Vehicle','Target');
-set(lgd,'Position',[0.437582915683962 0.793579130997642 0.189937106918239 0.0657620041753654]);
+set(lgd,'Position',[0.374158609854457 0.756341084558016 0.271071432862963 0.0869047637212845]);
+title("Vehicle and Target Paths vs. Time")
 xlabel('X position (m)')
 ylabel('Y position (m)')
 zlabel('Z position (m)')
+print("Path vs Time","-dpng","-r300")
 
 % Question 4 (Frame E) Position and Attitude vs. Time
 
