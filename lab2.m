@@ -1,14 +1,19 @@
-% Contributors: Victor Turpin Aguayo
+% Contributors: Victor Turpin Aguayo, Carson Mead
 % Course number: ASEN 3801
 % File name: lab2
 % Created: 1/20/26
 
 clc;clear;close all
 
-%% 2a
+%% 2a - LoadASPENData and ConvertASPENData
+% Reading in target and aerospace vehicle data and distributing into
+% separate usable vectors
+
 [t_vec, av_pos_inert, av_att, tar_pos_inert, tar_att] = LoadASPENData('3801_Sec001_test1.csv');
 
-%% 2b
+%% 2b - RotationMatrix321
+% 
+
 attitude321 = [9 -2 33];
 DCM_321 = RotationMatrix321(attitude321)
 
@@ -25,7 +30,8 @@ attitude313_2 = EulerAngles313(DCM_313)
 %% 2e
 
 %% Plots
-% Question 3 (Frame N)
+
+% Question 3 (Frame N) Position vs. Time
 
 M = readmatrix('3801_Sec001_test1.csv');
 M(1:3,:) = []; % Delete header rows
@@ -35,39 +41,38 @@ pos_av_N = M(:,11:13)'/1000; % Convert to m (from mm)
 pos_tar_N = M(:,5:7)'/1000; % Convert to m (from mm)
 
 figure();
-plot3(pos_av_N(1,:),pos_av_N(2,:),pos_av_N(3,:),'-b');
+plot3(pos_av_N(1,:),pos_av_N(2,:),pos_av_N(3,:),'-b',LineWidth=1);
 hold on
-plot3(pos_tar_N(1,:),pos_tar_N(2,:),pos_tar_N(3,:),'--r');
+plot3(pos_tar_N(1,:),pos_tar_N(2,:),pos_tar_N(3,:),'--r',LineWidth=1);
 grid on;
 lgd = legend('Aerospace Vehicle','Target');
 set(lgd,'Position',[0.437582915683962 0.793579130997642 0.189937106918239 0.0657620041753654]);
 xlabel('X position (m)')
 ylabel('Y position (m)')
 zlabel('Z position (m)')
-print('3D Drone and Target Paths', '-dpng', '-r300')
 
-% Question 4 (Frame E)
+% Question 4 (Frame E) Attitude vs. Time
 figure();
 subplot(3, 1, 1);
-plot(t_vec, av_pos_inert(1,:),'-b');
+plot(t_vec, av_pos_inert(1,:),'-b',LineWidth=1.5);
 hold on;
-plot(t_vec, tar_pos_inert(1,:),'--r');
+plot(t_vec, tar_pos_inert(1,:),'--r',LineWidth=1.5);
 ylabel('X position (m)')
 lgd1 = legend('Aerospace Vehicle', 'Target');
 set(lgd1,'Position',[0.430607966457023 0.938175646974225 0.171069182389937 0.0553235908141962]);
 grid on;
 
 subplot(3, 1, 2);
-plot(t_vec, av_pos_inert(2,:),'-b');
+plot(t_vec, av_pos_inert(2,:),'-b',LineWidth=1.5);
 hold on;
-plot(t_vec, tar_pos_inert(2,:),'--r');
+plot(t_vec, tar_pos_inert(2,:),'--r',LineWidth=1.5);
 ylabel('Y position (m)')
 grid on;
 
 subplot(3, 1, 3);
-plot(t_vec, av_pos_inert(3,:),'-b');
+plot(t_vec, av_pos_inert(3,:),'-b',LineWidth=1.5);
 hold on;
-plot(t_vec, tar_pos_inert(3,:),'--r');
+plot(t_vec, tar_pos_inert(3,:),'--r',LineWidth=1.5);
 ylabel('Z position (m)')
 xlabel('Time(s)')
 grid on;
@@ -96,4 +101,11 @@ plot(t_vec, rad2deg(tar_att(3,:)),'--r');
 ylabel('Roll \phi (deg)')
 xlabel('Time(s)')
 grid on;
+saveas(gcf,'Attitude vs Time','png')
+
+% Question 5
+
+
+
+% Question 6
 
