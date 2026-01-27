@@ -44,6 +44,7 @@ set(lgd,'Position',[0.437582915683962 0.793579130997642 0.189937106918239 0.0657
 xlabel('X position (m)')
 ylabel('Y position (m)')
 zlabel('Z position (m)')
+print('3D Drone and Target Paths', '-dpng', '-r300')
 
 % Question 4 (Frame E)
 figure();
