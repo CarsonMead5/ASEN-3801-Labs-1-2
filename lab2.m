@@ -51,15 +51,18 @@ xlabel('X position (m)')
 ylabel('Y position (m)')
 zlabel('Z position (m)')
 
-% Question 4 (Frame E) Attitude vs. Time
+% Question 4 (Frame E) Position and Attitude vs. Time
+
+% Position vs. Time
 figure();
+sgtitle("Position vs. Time")
 subplot(3, 1, 1);
 plot(t_vec, av_pos_inert(1,:),'-b',LineWidth=1.5);
 hold on;
 plot(t_vec, tar_pos_inert(1,:),'--r',LineWidth=1.5);
 ylabel('X position (m)')
 lgd1 = legend('Aerospace Vehicle', 'Target');
-set(lgd1,'Position',[0.430607966457023 0.938175646974225 0.171069182389937 0.0553235908141962]);
+set(lgd1,'Position',[0.661309520165125 0.911346132699368 0.24392857507297 0.0716666681198846]);
 grid on;
 
 subplot(3, 1, 2);
@@ -76,28 +79,31 @@ plot(t_vec, tar_pos_inert(3,:),'--r',LineWidth=1.5);
 ylabel('Z position (m)')
 xlabel('Time(s)')
 grid on;
+saveas(gcf,"Position vs Time","png")
 
+% Attitude vs. Time
 figure();
+sgtitle("Attitude vs. Time")
 subplot(3, 1, 1);
-plot(t_vec, rad2deg(av_att(1,:)),'-b');
+plot(t_vec, rad2deg(av_att(1,:)),'-b',LineWidth=1);
 hold on;
-plot(t_vec, rad2deg(tar_att(1,:)),'--r');
+plot(t_vec, rad2deg(tar_att(1,:)),'--r',LineWidth=1);
 ylabel('Yaw \psi (deg)')
 lgd2 = legend('Aerospace Vehicle', 'Target');
-set(lgd2,'Position',[0.430607966457023 0.938175646974225 0.171069182389937 0.0553235908141962]);
+set(lgd2,'Position',[0.661309520165125 0.911346132699368 0.24392857507297 0.0716666681198846]);
 grid on;
 
 subplot(3, 1, 2);
-plot(t_vec, rad2deg(av_att(2,:)),'-b');
+plot(t_vec, rad2deg(av_att(2,:)),'-b',LineWidth=1);
 hold on;
-plot(t_vec, rad2deg(tar_att(2,:)),'--r');
+plot(t_vec, rad2deg(tar_att(2,:)),'--r',LineWidth=1);
 ylabel('Pitch \theta (deg)')
 grid on;
 
 subplot(3, 1, 3);
-plot(t_vec, rad2deg(av_att(3,:)),'-b');
+plot(t_vec, rad2deg(av_att(3,:)),'-b',LineWidth=1);
 hold on;
-plot(t_vec, rad2deg(tar_att(3,:)),'--r');
+plot(t_vec, rad2deg(tar_att(3,:)),'--r',LineWidth=1);
 ylabel('Roll \phi (deg)')
 xlabel('Time(s)')
 grid on;
