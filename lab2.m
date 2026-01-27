@@ -87,9 +87,9 @@ saveas(gcf,"Position vs Time","png")
 figure();
 sgtitle("Attitude vs. Time")
 subplot(3, 1, 1);
-plot(t_vec, rad2deg(av_att(1,:)),'-b',LineWidth=1);
+plot(t_vec, rad2deg(av_att(3,:)),'-b',LineWidth=1);
 hold on;
-plot(t_vec, rad2deg(tar_att(1,:)),'--r',LineWidth=1);
+plot(t_vec, rad2deg(tar_att(3,:)),'--r',LineWidth=1);
 ylabel('Yaw \psi (deg)')
 lgd2 = legend('Aerospace Vehicle', 'Target');
 set(lgd2,'Position',[0.661309520165125 0.911346132699368 0.24392857507297 0.0716666681198846]);
@@ -103,16 +103,52 @@ ylabel('Pitch \theta (deg)')
 grid on;
 
 subplot(3, 1, 3);
-plot(t_vec, rad2deg(av_att(3,:)),'-b',LineWidth=1);
+plot(t_vec, rad2deg(av_att(1,:)),'-b',LineWidth=1);
 hold on;
-plot(t_vec, rad2deg(tar_att(3,:)),'--r',LineWidth=1);
+plot(t_vec, rad2deg(tar_att(1,:)),'--r',LineWidth=1);
 ylabel('Roll \phi (deg)')
 xlabel('Time(s)')
 grid on;
 saveas(gcf,'Attitude vs Time','png')
 
-% Question 5
+% Question 5:
+%calculate 313 euler angles over time 
+Euler_Angles313_ac = zeros(3,length(t_vec));
+Euler_Angles313_tar = zeros(3, length(t_vec));
+for i = 1:length(t_vec)
+    Euler_Angles313_ac(:,i) = [EulerAngles313(RotationMatrix321(rad2deg(av_att(:,i))))];     % a/c 313 angles (alpha, beta, gamma)
+    Euler_Angles313_tar(:,i) = [EulerAngles313(RotationMatrix321(rad2deg(tar_att(:,i))))];   % target 313 angles (alpha, beta, gamma)
+end
 
+figure();
+sgtitle("313 Euler Angles vs. Time")
+subplot(3, 1, 1);
+plot(t_vec, Euler_Angles313_ac(1,:),'-b',LineWidth=1); % alpha (roll) of ac
+hold on; 
+plot(t_vec, Euler_Angles313_tar(1,:),'--r',LineWidth=1); % alpha (roll) of target
+ylabel('\alpha (deg)')
+xlabel('Time(s)')
+grid on;
+
+subplot(3, 1, 2);
+plot(t_vec, Euler_Angles313_ac(2,:),'-b',LineWidth=1); % beta (pitch) of ac
+hold on; 
+plot(t_vec, Euler_Angles313_tar(2,:),'--r',LineWidth=1); % beta (pitch) of target
+ylabel('\beta (deg)')
+xlabel('Time(s)')
+grid on;
+
+subplot(3, 1, 3);
+title("313 Euler Angles for AC and Target")
+plot(t_vec, Euler_Angles313_ac(3,:),'-b',LineWidth=1); % gamma (yaw) of ac
+hold on; 
+plot(t_vec, Euler_Angles313_tar(3,:),'--r',LineWidth=1); % gamma (yaw) of target
+ylabel('\gamma (deg)')
+xlabel('Time(s)')
+grid on;
+lgd3 = legend('Aerospace Vehicle', 'Target');
+set(lgd3,'Position',[0.661309520165125 0.911346132699368 0.24392857507297 0.0716666681198846]);
+saveas(gcf,'313EulerAngles','png')
 
 
 % Question 6
