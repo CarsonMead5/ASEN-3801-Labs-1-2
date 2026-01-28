@@ -33,13 +33,22 @@ pos_av_aspen = M(:,11:13)'/1000; % Convert to m (from mm)
 att_av_aspen = M(:,8:10)'; % Radians
 pos_tar_aspen = M(:,5:7)'/1000; % Convert to m (from mm)
 att_tar_aspen = M(:,2:4)';  % Radians
+t_vec = (M(:,1)-1)' * (1/100); % Converting frame numbers into time (1 Frame = 0.01 sec)
 
 [pos_av_class, att_av_class, pos_tar_class, att_tar_class] = ConvertASPENData(pos_av_aspen, att_av_aspen,  pos_tar_aspen, att_tar_aspen);
 
-av_pos_inert = pos_av_class;
-av_att = att_av_class;
-tar_pos_inert = pos_tar_class;
-tar_att = att_tar_class;
-t_vec = (M(:,1)-1)' * (1/100);
+% Parsing data to remove zero values
+% Matrix concatenating each vector/matrix to make removal easier
+parseMat = [t_vec;pos_av_class;att_av_class;pos_tar_class;att_tar_class];
+
+% Searching through each index to find columns with exactly 0
+parseMat(:,any(parseMat==0,1)) = [];
+
+% Entering all ConvertASPENData outputs to wanted vectors
+t_vec = parseMat(1,:); % Time
+av_pos_inert = parseMat(2:4,:); % Position of vehicle
+av_att = parseMat(5:7,:); % Attitude of vehicle
+tar_pos_inert = parseMat(8:10,:); % Position of target
+tar_att = parseMat(11:13,:); % Attitude of target
 
 end
